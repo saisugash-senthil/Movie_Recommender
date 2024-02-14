@@ -40,8 +40,8 @@ with open(file_path, 'rb') as file:
 movies = pd.DataFrame(movies_dict)
 file_2 = "similarity.pkl"
 similarity_path = os.path.join(script_directory, file_2)
-with open(similarity_path,'rb') as similar:
-    similarity = pickle.load(similar)
+with open(similarity_path,'rb') as file:
+    similarity = pickle.load(file)
 
 st.title('Movie Recommender System')
 selected_movie_name = st.selectbox(
