@@ -33,6 +33,7 @@ def recommend(movie):
 file_name = "movie_dict.pkl"
 file_path = os.path.join(script_directory, file_name)
 with open(file_path, 'rb') as file:
+    movies_dict = pickle.load(file)
 movies = pd.DataFrame(movies_dict)
 script_directory = os.path.dirname(os.path.abspath(__file__))
 similarity_path = os.path.join(script_directory, "similarity.pkl")
