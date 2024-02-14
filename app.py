@@ -10,7 +10,7 @@ def fetch_poster(movie_id, max_retries=3):
     while retries < max_retries:
         try:
             response = requests.get(f'https://api.themoviedb.org/3/movie/{movie_id}?api_key=286f68097bd452ef9842c97fa7cc4c85&language=en-US')
-            response.raise_for_status()  # Raise an error for bad responses
+            response.raise_for_status()  
             data = response.json()
             return "https://image.tmdb.org/t/p/w500" + data['poster_path']
         except requests.exceptions.RequestException as e:
