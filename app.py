@@ -30,12 +30,12 @@ def recommend(movie):
         recommended_movies.append(movies.iloc[i[0]].title)
         recommended_movies_posters.append(fetch_poster(movie_id))
     return recommended_movies,recommended_movies_posters
+    script_directory = os.path.dirname(os.path.abspath(__file__))
 file_name = "movie_dict.pkl"
 file_path = os.path.join(script_directory, file_name)
 with open(file_path, 'rb') as file:
     movies_dict = pickle.load(file)
 movies = pd.DataFrame(movies_dict)
-script_directory = os.path.dirname(os.path.abspath(__file__))
 similarity_path = os.path.join(script_directory, "similarity.pkl")
 similarity = pickle.load(open(similarity_path, 'rb'))
 st.title('Movie Recommender System')
