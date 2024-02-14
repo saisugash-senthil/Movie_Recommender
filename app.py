@@ -40,7 +40,7 @@ with open(file_path, 'rb') as file:
 movies = pd.DataFrame(movies_dict)
 file_2 = "similarity.pkl"
 similarity_path = os.path.join(script_directory, file_2)
-with open(file_2,'rb') as similar:
+with open(similarity_path,'rb') as similar:
     similarity = pickle.load(similar)
 
 st.title('Movie Recommender System')
