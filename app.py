@@ -19,6 +19,7 @@ def fetch_poster(movie_id, max_retries=3):
             time.sleep(2 ** retries)
     st.error("Max retries reached. Unable to fetch data.")
     return None
+
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
@@ -29,36 +30,44 @@ def recommend(movie):
         movie_id = movies.iloc[i[0]].movie_id
         recommended_movies.append(movies.iloc[i[0]].title)
         recommended_movies_posters.append(fetch_poster(movie_id))
-    return recommended_movies,recommended_movies_posters
+    return recommended_movies, recommended_movies_posters
+
 script_directory = os.path.dirname(os.path.abspath(__file__))
 file_name = "movie_dict.pkl"
 file_path = os.path.join(script_directory, file_name)
 with open(file_path, 'rb') as file:
     movies_dict = pickle.load(file)
+
 movies = pd.DataFrame(movies_dict)
 similarity_path = os.path.join(script_directory, "similarity.pkl")
 similarity = pickle.load(open(similarity_path, 'rb'))
+
 st.title('Movie Recommender System')
 selected_movie_name = st.selectbox(
-'Which movie do you want to select?',
-movies['title'].values)
+    'Which movie do you want to select?',
+    movies['title'].values
+)
+
 if st.button('Check for recommendations'):
-    names,posters = recommend(selected_movie_name)
-    col1,col2,col3,col4,col5= st.columns(5)
+    names, posters = recommend(selected_movie_name)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
         st.text(names[0])
         st.image(posters[0])
+
     with col2:
         st.text(names[1])
         st.image(posters[1])
+
     with col3:
         st.text(names[2])
         st.image(posters[2])
+
     with col4:
         st.text(names[3])
         st.image(posters[3])
+
     with col5:
         st.text(names[4])
         st.image(posters[4])
-
